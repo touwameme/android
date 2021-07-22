@@ -1,22 +1,35 @@
 package com.example.mytiktok;
 
-import android.os.Bundle;
-import android.graphics.Color;
 
+import android.graphics.Color;
+import android.media.MediaPlayer;
+import android.os.Bundle;
+
+import android.view.SurfaceHolder;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.TextView;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager.widget.ViewPager;
 
 
-public class MainActivity extends AppCompatActivity {
+
+
+public class MainActivity extends FragmentActivity {
+
     private ListAdapter listAdapter = new ListAdapter();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_activity);
+        Window window = this.getWindow();
+        window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+
         TextView tv_item_one = findViewById(R.id.tv_item_one);
         TextView tv_item_two = findViewById(R.id.tv_item_two);
         TextView tv_item_three = findViewById(R.id.tv_item_three);
@@ -26,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 myViewPager.setCurrentItem(0);
-                tv_item_one.setTextColor(Color.WHITE);
+                tv_item_one.setTextColor(Color.BLACK);
                 tv_item_two.setTextColor(Color.GRAY);
                 tv_item_three.setTextColor(Color.GRAY);
             }
@@ -37,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 myViewPager.setCurrentItem(1);
                 tv_item_one.setTextColor(Color.GRAY);
-                tv_item_two.setTextColor(Color.WHITE);
+                tv_item_two.setTextColor(Color.BLACK);
                 tv_item_three.setTextColor(Color.GRAY);
             }
         });
@@ -47,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
                 myViewPager.setCurrentItem(2);
                 tv_item_one.setTextColor(Color.GRAY);
                 tv_item_two.setTextColor(Color.GRAY);
-                tv_item_three.setTextColor(Color.WHITE);
+                tv_item_three.setTextColor(Color.BLACK);
             }
         });
 
@@ -61,21 +74,21 @@ public class MainActivity extends AppCompatActivity {
             public void onPageSelected(int position) {
                 switch (position){
                     case 0:{
-                        tv_item_one.setTextColor(Color.WHITE);
+                        tv_item_one.setTextColor(Color.BLACK);
                         tv_item_two.setTextColor(Color.GRAY);
                         tv_item_three.setTextColor(Color.GRAY);
                         break;
                     }
                     case 1:{
                         tv_item_one.setTextColor(Color.GRAY);
-                        tv_item_two.setTextColor(Color.WHITE);
+                        tv_item_two.setTextColor(Color.BLACK);
                         tv_item_three.setTextColor(Color.GRAY);
                         break;
                     }
                     case 2:{
                         tv_item_one.setTextColor(Color.GRAY);
                         tv_item_two.setTextColor(Color.GRAY);
-                        tv_item_three.setTextColor(Color.WHITE);
+                        tv_item_three.setTextColor(Color.BLACK);
                         break;
                     }
                 }
@@ -87,10 +100,10 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        getSupportActionBar().hide();
+     //   getSupportActionBar().hide();
         myViewPager.setAdapter(new PagerAdapter(getSupportFragmentManager()));
         myViewPager.setCurrentItem(0);
+
+    }
     }
 
-
-}

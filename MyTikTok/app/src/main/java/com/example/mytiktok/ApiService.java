@@ -8,5 +8,5 @@ import retrofit2.http.GET;
 public interface ApiService {
     // https://beiyou.bytedance.com/api/invoke/video/invoke/video
     @GET("api/invoke/video/invoke/video")
-    Call<List<Video>> getVideos();
+    Call<List<InfoOfVideo>> getVideos();
 }

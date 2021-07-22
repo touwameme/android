@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black"
+    android:orientation="vertical"
+    tools:context=".MainActivity"
+    >
+
+
+    <com.example.mytiktok.player.VideoPlayerIJK
+        android:id="@+id/ijkPlayer"
+        android:layout_width="match_parent"
+        android:layout_height="690dp"
+        tools:ignore="MissingConstraints">
+
+
+    </com.example.mytiktok.player.VideoPlayerIJK>
+    <LinearLayout
+        android:id="@+id/seekbar"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_gravity="bottom"
+        android:background="@color/black"
+        android:orientation="horizontal"
+        tools:layout_alignParentBottom="false">
+        <TextView
+            android:id="@+id/tvCurrentTime"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="current："
+            android:textColor="@android:color/white" />
+        <SeekBar
+            android:id="@+id/seekBarVideo"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:thumbTint="@color/white"
+            android:progressTint="@color/azure"
+            android:layout_toLeftOf="@+id/tvTotalTime"
+            android:layout_toRightOf="@+id/tvCurrentTime" />
+
+
+
+        <TextView
+            android:id="@+id/tvTotalTime"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:gravity="center"
+            android:text="total："
+            android:textColor="@android:color/white" />
+
+    </LinearLayout>
+
+</LinearLayout>

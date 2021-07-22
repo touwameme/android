@@ -12,20 +12,19 @@ import java.util.List;
 
 public class ListAdapter extends RecyclerView.Adapter<ListHolder> {
 
-    private final List<Video> videoList = new ArrayList<>();
+    public final List<InfoOfVideo> infoOfVideoList = new ArrayList<>();
+    private MyOnClickListener mCickListener;
 
-    private OnItemClickListener mCickListener;
-
-    public void refresh(List<Video> newVideos) {
-        videoList.clear();
-        if (newVideos != null) {
-            videoList.addAll(newVideos);
+    public void refresh(List<InfoOfVideo> newInfoOfVideos) {
+        infoOfVideoList.clear();
+        if (newInfoOfVideos != null) {
+            infoOfVideoList.addAll(newInfoOfVideos);
         }
         notifyDataSetChanged();
     }
 
-    public List<Video> getVideoList(){
-        return this.videoList;
+    public List<InfoOfVideo> getVideoList(){
+        return this.infoOfVideoList;
     }
 
     @NonNull
@@ -36,22 +35,22 @@ public class ListAdapter extends RecyclerView.Adapter<ListHolder> {
         return new ListHolder(itemView,mCickListener);
     }
 
-    public void setOnItemClickListener(OnItemClickListener listener){
+    public void setOnItemClickListener(MyOnClickListener listener){
         this.mCickListener=listener;
     }
     @Override
     public void onBindViewHolder(@NonNull ListHolder holder, int position) {
-        holder.bind(videoList.get(position));
+        holder.bind(infoOfVideoList.get(position));
     }
 
     @Override
     public int getItemCount() {
-        return videoList.size();
+        return infoOfVideoList.size();
     }
 
-    public void setData(List<Video> videoLi) {
-        for (int i = 0; i < videoLi.size(); i++) {
-            videoList.add(videoLi.get(i));
+    public void setData(List<InfoOfVideo> infoOfVideoLi) {
+        for (int i = 0; i < infoOfVideoLi.size(); i++) {
+            infoOfVideoList.add(infoOfVideoLi.get(i));
         }
     }
 }

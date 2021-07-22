@@ -15,29 +15,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 public class ImageView extends androidx.appcompat.widget.AppCompatImageView {
-    public static final int GET_DATA_SUCCESS = 1;
-    public static final int NETWORK_ERROR = 2;
-    public static final int SERVER_ERROR = 3;
 
-    @SuppressLint("HandlerLeak")
-    private final Handler handler = new Handler() {
-        @SuppressLint("HandlerLeak")
-        @Override
-        public void handleMessage(Message msg) {
-            switch (msg.what){
-                case GET_DATA_SUCCESS:
-                    Bitmap bitmap = (Bitmap) msg.obj;
-                    setImageBitmap(bitmap);
-                    break;
-                case NETWORK_ERROR:
-                    Toast.makeText(getContext(),"网络连接失败",Toast.LENGTH_SHORT).show();
-                    break;
-                case SERVER_ERROR:
-                    Toast.makeText(getContext(),"服务器发生错误",Toast.LENGTH_SHORT).show();
-                    break;
-            }
-        }
-    };
 
     public ImageView(Context context) {
         super(context);
@@ -79,4 +57,29 @@ public class ImageView extends androidx.appcompat.widget.AppCompatImageView {
             }
         }.start();
     }
+    public  final int GET_DATA_SUCCESS = 1;
+    public  final int NETWORK_ERROR = 2;
+    public  final int SERVER_ERROR = 3;
+
+    @SuppressLint("HandlerLeak")
+    private final Handler handler = new Handler() {
+        @SuppressLint("HandlerLeak")
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what){
+                case GET_DATA_SUCCESS:
+                    Bitmap bitmap = (Bitmap) msg.obj;
+                    setImageBitmap(bitmap);
+                    break;
+                case NETWORK_ERROR:
+                    Toast.makeText(getContext(),"网络错误",Toast.LENGTH_SHORT).show();
+                    break;
+                case SERVER_ERROR:
+                    Toast.makeText(getContext(),"服务器发生错误",Toast.LENGTH_SHORT).show();
+                    break;
+            }
+        }
+    };
+
+
 }

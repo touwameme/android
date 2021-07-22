@@ -6,9 +6,9 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
 public class PagerAdapter extends FragmentPagerAdapter{
-    private  MainFragment mainFragment= new MainFragment();
-    private  Fragment2 fragment2 = new Fragment2();
-    private  Fragment3 fragment3 = new Fragment3();
+    public   MainFragment mainFragment= new MainFragment();
+    public   Fragment2 fragment2 = new Fragment2();
+    public   Fragment3 fragment3 = new Fragment3();
 
     public PagerAdapter(@NonNull  FragmentManager fm) {
         super(fm);

@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -23,12 +24,13 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+
+
 public class MainFragment extends Fragment {
 
     private ListAdapter listAdapter = new ListAdapter();
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
-    private List<Video> videolist  ;
 
     @Nullable
     @Override
@@ -40,17 +42,23 @@ public class MainFragment extends Fragment {
                 view.getContext(), LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(listAdapter);
-        getData();
+        requestData();
+        Log.d("FragM",listAdapter.getItemCount()+"\n");
         Fresco.initialize(view.getContext());
         Log.d("FragM","after init fresco");
-        listAdapter.setOnItemClickListener(new OnItemClickListener() {
+        listAdapter.setOnItemClickListener(new MyOnClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                Intent intent = new Intent(view.getContext(), VideoActivity.class);
+                Log.d("FragM","onItemClick\n");
+                String url = listAdapter.getVideoList().get(position).feedUrl;
+                Log.d("FragM","set url:"+url);
                 Bundle bundle = new Bundle();
                 bundle.putString("feedurl", listAdapter.getVideoList().get(position).feedUrl);
-                intent.putExtras(bundle);
-                startActivity(intent);
+                Intent jmpintent = new Intent(view.getContext(), IJKPlayerActivity.class);
+                jmpintent.putExtras(bundle);
+                Log.d("FragM","jmpitent");
+                startActivity(jmpintent);
+
             }
         });
         return view ;
@@ -65,27 +73,28 @@ public class MainFragment extends Fragment {
 
     }
 
-    private void getData() {
+
+    private void requestData() {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://beiyou.bytedance.com/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
         ApiService apiService = retrofit.create(ApiService.class);
-        apiService.getVideos().enqueue(new Callback<List<Video>>() {
+        apiService.getVideos().enqueue(new Callback<List<InfoOfVideo>>() {
             @Override
-            public void onResponse(Call<List<Video>> call, Response<List<Video>> response) {
+            public void onResponse(Call<List<InfoOfVideo>> call, Response<List<InfoOfVideo>> response) {
                 Log.d("FragM", "success\n");
                 if (response.body() != null) {
-                    List<Video> videoList = response.body();
-                    if (videoList.size() != 0) {
-                        listAdapter.setData(videoList);
+                    List<InfoOfVideo> infoOfVideoList = response.body();
+                    if (infoOfVideoList.size() != 0) {
+                        listAdapter.setData(infoOfVideoList);
                         listAdapter.notifyDataSetChanged();
                     }
                 }
             }
             @Override
-            public void onFailure(Call<List<Video>> call, Throwable t) {
+            public void onFailure(Call<List<InfoOfVideo>> call, Throwable t) {
                 //System.err.println(call.toString());
                 Log.d("retrofitFail", t.getMessage());
             }

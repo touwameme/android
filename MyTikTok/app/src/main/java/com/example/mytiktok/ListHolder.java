@@ -14,15 +14,15 @@ public class ListHolder extends RecyclerView.ViewHolder implements View.OnClickL
     private TextView likeCount;
     private TextView descp;
 
-    private OnItemClickListener mListener;
-    public void bind(final Video video) {
-        nickName.setText(video.nickName);
-        imageView.setImageURL(video.thumbnails); //cover_img
-        likeCount.setText("likes：" + video.likeCount);
-        descp.setText(video.description);
+    private MyOnClickListener mListener;
+    public void bind(final InfoOfVideo infoOfVideo) {
+        nickName.setText(infoOfVideo.nickName);
+        imageView.setImageURL(infoOfVideo.thumbnails); //cover_img
+        likeCount.setText("likes：" + infoOfVideo.likeCount);
+        descp.setText(infoOfVideo.description);
     }
 
-    public ListHolder(@NonNull View itemView, OnItemClickListener listener) {
+    public ListHolder(@NonNull View itemView, MyOnClickListener listener) {
         super(itemView);
         itemView.setOnClickListener(this);
         imageView = itemView.findViewById(R.id.image);
